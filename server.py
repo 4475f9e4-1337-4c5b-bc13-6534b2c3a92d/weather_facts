@@ -1,0 +1,61 @@
+from flask import Flask, jsonify
+import random
+
+app = Flask(__name__)
+
+facts = [
+    "You can tell the temperature by counting a cricket’s chirps!",
+    "Sandstorms can swallow up entire cities",
+    "Dirt mixed with wind can make dust storms called black blizzards.",
+    "A mudslide can carry rocks, trees, vehicles and entire buildings!",
+    "The coldest temperature ever officially recorded was -89.2°C. Brrrr!",
+    "Mild autumn weather often means bigger spiders in our homes.",
+    "A heatwave can make train tracks bend!",
+    "About 2,000 thunderstorms rain down on Earth every minute.",
+    "A 2003 heatwave turned grapes to raisins before they were picked from the vine!",
+    "Lightning often follows a volcanic eruption.",
+    "Raindrops can be the size of a housefly and fall at more than 30kmph.",
+    "Cape Farewell in Greenland is the windiest place on the planet.",
+    "Hurricanes can push more than 6m of water ashore.",
+    "In July 2001 the rainfall in Kerala, India, was blood red!",
+    "Blizzards can make snowflakes feel like pellets hitting your face.",
+    "A hurricane in Florida, USA, caused 900 captive pythons to escape.",
+    "Worms wriggle up from underground when a flood is coming.",
+    "A thunderstorm can produce 160kmph winds!",
+    "In Antarctica, snow can fall so hard you can’t see your hand in front of your face.",
+    "A whiteout or heavy snowfall that makes it difficult to see, can make you feel sick.",
+    "Wildfires sometimes create tornadoes made of fire called fire whirls.",
+    "Some tornadoes can be faster than formula one racing cars!",
+    "Black ice, a transparent coating of ice on a surface, can make pavements super-slippery.",
+    "Some frogs get noisier just before it rains.",
+    "Waterspouts, or rotating columns of air over water, can make sea creatures rain down from the sky.",
+    "The most damage ever caused by a thunderstorm was in 1995, when hailstones bigger than cricket balls fell in Texas, USA.",
+    "In 1684, it was so cold that the River Thames froze solid for two months.",
+    "Cats and dogs have been known to sense when a tornado is approaching."
+    "Mawsynram, India, receives an average of 467 inches of rain per year, making it the wettest place on Earth.",
+    "Around 100 lightning strikes hit Earth every second.",
+    "Thunder is the sound caused by the rapid expansion of air due to the heat from lightning, which can reach up to 54,000°F — hotter than the surface of the sun!",
+    "Tornadoes can spin at speeds up to 300 mph (480 km/h), which is faster than the top speed of a commercial airplane.",
+    "The coldest temperature ever recorded on Earth was -128.6°F (-89.2°C) in Antarctica on July 21, 1983.",
+    "A full circle rainbow can often be seen from the air or on high mountains, but we usually see only a half-circle because the ground blocks the rest of the arc.",
+    "The highest cloud recorded was at about 85,000 feet (25,900 meters) above the Earth’s surface, higher than some commercial jets fly!",
+    "Hailstones can grow to the size of softballs, but typically they range from pea-size to golf ball size.",
+    "The fastest wind speed ever recorded was 253 mph (407 km/h) in Australia during Cyclone Olivia in 1996.",
+    "No two snowflakes are exactly alike, but they all have six sides, due to the molecular structure of ice.",
+    "Heat lightning is just lightning that occurs too far away for the thunder to be heard. It can be seen on the horizon during warm, humid nights.",
+    "Fog is made up of tiny water droplets suspended in the air, and it can reduce visibility to as little as 10 feet (3 meters) or even less.",
+    "Deserts can sometimes receive rain only once every few years, but when it does rain, the landscape can change almost overnight into a colorful floral display.",
+    "The Coriolis Effect is responsible for the rotation direction of large weather systems: it causes storms in the Northern Hemisphere to rotate counterclockwise and clockwise in the Southern Hemisphere.",
+    "There are four main cloud types: cirrus, cumulus, stratus, and nimbus. Each one has distinct characteristics and weather implications.",
+    "The Northern and Southern Lights (Auroras Borealis and Australis) are caused by particles from the Sun interacting with the Earth's magnetic field, creating colorful light displays.",
+    "Some hurricanes can be over 500 miles (800 km) wide, with their winds reaching speeds of over 200 mph (320 km/h)."
+]
+
+@app.route('/fact', methods=['GET'])
+def get_random_fact():
+    random_fact = random.choice(facts)
+    return jsonify({"fact": random_fact})
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
