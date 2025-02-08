@@ -1,6 +1,6 @@
 ### 🌦️ Weather Facts API 🌦️
 
-This project provides a simple **Flask API** that returns random weather facts. The API exposes a single endpoint `/fact` that returns a JSON object with a random weather fact.
+This project provides a simple API that returns random weather facts. The API exposes a single endpoint `/fact` that returns a JSON object with a random weather fact.
 
 ---
 
