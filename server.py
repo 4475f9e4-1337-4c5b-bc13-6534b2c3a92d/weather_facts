@@ -1,7 +1,8 @@
-from flask import Flask, jsonify
+from json.decoder import JSONDecodeError
+from flask import Flask, request, jsonify
+import secrets
 import random
-
-app = Flask(__name__)
+import json
 
 facts = [
     "You can tell the temperature by counting a cricket’s chirps!",
@@ -51,10 +52,69 @@ facts = [
     "Some hurricanes can be over 500 miles (800 km) wide, with their winds reaching speeds of over 200 mph (320 km/h)."
 ]
 
+app = Flask(__name__)
+save_file = 'favorites.json'
+
+
+def read_favorites():
+    try:
+        with open(save_file, "r") as f:
+            return json.load(f)
+    except (FileNotFoundError, JSONDecodeError) as e:
+        print("err", e)
+        return {}
+
+
+def write_favorites(data):
+    with open(save_file, "w") as f:
+        json.dump(data, f)
+
+
 @app.route('/fact', methods=['GET'])
 def get_random_fact():
     random_fact = random.choice(facts)
-    return jsonify({"fact": random_fact})
+    return jsonify({ "fact": random_fact })
+
+
+@app.route('/favorites', methods=['GET'])
+def get_favorites():
+    try:
+        favorites = read_favorites()
+        return jsonify({ "favorites": favorites })
+    except OSError as e:
+        print("error", e)
+        return jsonify({})
+
+
+@app.route('/favorites', methods=['POST'])
+def post_favorite():
+    data = request.get_json(force=True, silent=True)
+    if not data or "fact" not in data:
+        return jsonify({ "error": "Bad Request" }), 400
+    try:
+        favorites = read_favorites()
+        id = secrets.token_hex(8)
+        fact = data.get('fact')
+        if fact not in favorites.values():
+            favorites[id] = fact
+            write_favorites(favorites)
+        return jsonify({ "success": True })
+    except (OSError, JSONDecodeError) as e:
+        print("error", e)
+        return jsonify({ "error": "Internal Server Error" }), 500
+
+
+@app.route('/favorites/<string:id>', methods=['DELETE'])
+def delete_favorite(id):
+    try:
+        favorites = read_favorites()
+        n = favorites.pop(id, None)
+        write_favorites(favorites)
+        return jsonify({ "success": True, 'n': 0 if n == None else 1 })
+    except (OSError, JSONDecodeError) as e:
+        print("error", e)
+        return jsonify({ "error": "Internal Server Error" }), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)
