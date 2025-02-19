@@ -216,3 +216,10 @@ print(r.json())
 ```json
 { "error": "Internal server error" }
 ```
+
+---
+### 📈 UML Sequence Diagram 📈
+<p align="center">
+  <img src="./weather_facts_api_sequence.png" alt="UML Sequence Diagram"/>
+</p>
+
