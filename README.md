@@ -56,13 +56,13 @@ HOST=0.0.0.0 PORT=8080 ./run.sh
 #### GET `/fact`
 ##### Get a random weather fact.
 
-###### Code samples
-
+##### Code samples:
+###### shell
 ```shell
 curl -X GET http://localhost:5000/fact \
   -H 'Accept: application/json'
 ```
-
+###### python
 ```python
 import requests
 headers = { 'Accept': 'application/json' }
@@ -86,12 +86,13 @@ print(r.json())
 #### GET `/favorites`
 ##### Get a saved favorite weather fact.
 
-###### Code samples:
+##### Code samples:
+###### shell
 ```shell
 curl -X GET http://localhost:5000/favorites \
   -H 'Accept: application/json'
 ```
-
+###### python
 ```python
 import requests
 headers = { 'Accept': 'application/json' }
@@ -125,14 +126,15 @@ print(r.json())
 #### POST `/favorites`
 ##### Save a weather fact to favorites.
 
-###### Code samples:
+##### Code samples:
+###### shell
 ```shell
 curl -X POST http://localhost:5000/favorites \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -d '{ "fact": "My new favorite fact" }'
 ```
-
+###### python
 ```python
 import requests
 headers = { 'Accept': 'application/json' }
@@ -178,12 +180,13 @@ print(r.json())
 #### DELETE `/favorites/{id}`
 ##### Delete a favorited fact by id.
 
-###### Code samples:
+##### Code samples:
+###### shell
 ```shell
 curl -X DELETE http://localhost:5000/favorites/9e6b2d09b197c310 \
   -H 'Accept: application/json'
 ```
-
+###### python
 ```python
 import requests
 headers = { 'Accept': 'application/json' }
