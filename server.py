@@ -32,7 +32,7 @@ facts = [
     "Waterspouts, or rotating columns of air over water, can make sea creatures rain down from the sky.",
     "The most damage ever caused by a thunderstorm was in 1995, when hailstones bigger than cricket balls fell in Texas, USA.",
     "In 1684, it was so cold that the River Thames froze solid for two months.",
-    "Cats and dogs have been known to sense when a tornado is approaching."
+    "Cats and dogs have been known to sense when a tornado is approaching.",
     "Mawsynram, India, receives an average of 467 inches of rain per year, making it the wettest place on Earth.",
     "Around 100 lightning strikes hit Earth every second.",
     "Thunder is the sound caused by the rapid expansion of air due to the heat from lightning, which can reach up to 54,000°F — hotter than the surface of the sun!",
@@ -90,7 +90,8 @@ def get_favorites():
 def post_favorite():
     data = request.get_json(force=True, silent=True)
     if not data or "fact" not in data:
-        return jsonify({ "error": "Bad Request" }), 400
+        return jsonify({ "error": "Missing 'fact' property in body" }), 400
+
     try:
         favorites = read_favorites()
         fact = data.get('fact')
