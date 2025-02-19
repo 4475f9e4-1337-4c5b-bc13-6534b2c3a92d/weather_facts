@@ -4,7 +4,7 @@ VENV = .venv
 
 # Detect OS
 ifeq ($(OS), Windows_NT)
-    ACTIVATE = $(VENV)\Scripts\activate
+    ACTIVATE = $(VENV)\\Scripts\\activate
 else
     ACTIVATE = . $(VENV)/bin/activate
 endif
