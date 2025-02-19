@@ -61,7 +61,7 @@ def read_favorites():
         with open(save_file, "r") as f:
             return json.load(f)
     except (FileNotFoundError, JSONDecodeError) as e:
-        print("err", e)
+        print("error", e)
         return {}
 
 
@@ -73,17 +73,17 @@ def write_favorites(data):
 @app.route('/fact', methods=['GET'])
 def get_random_fact():
     random_fact = random.choice(facts)
-    return jsonify({ "fact": random_fact })
+    return jsonify({ "fact": random_fact }), 200
 
 
 @app.route('/favorites', methods=['GET'])
 def get_favorites():
     try:
         favorites = read_favorites()
-        return jsonify({ "favorites": favorites })
+        return jsonify({ "favorites": favorites }), 200
     except OSError as e:
         print("error", e)
-        return jsonify({})
+        return jsonify({ "error": "Internal Server Error" }), 500
 
 
 @app.route('/favorites', methods=['POST'])
@@ -93,12 +93,15 @@ def post_favorite():
         return jsonify({ "error": "Bad Request" }), 400
     try:
         favorites = read_favorites()
-        id = secrets.token_hex(8)
         fact = data.get('fact')
-        if fact not in favorites.values():
+        id = next((k for k, v in favorites.items() if v == fact), None)
+
+        if id == None:
+            id = secrets.token_hex(8)
             favorites[id] = fact
             write_favorites(favorites)
-        return jsonify({ "success": True })
+
+        return jsonify({ "id": id }), 200
     except (OSError, JSONDecodeError) as e:
         print("error", e)
         return jsonify({ "error": "Internal Server Error" }), 500
@@ -110,7 +113,7 @@ def delete_favorite(id):
         favorites = read_favorites()
         n = favorites.pop(id, None)
         write_favorites(favorites)
-        return jsonify({ "success": True, 'n': 0 if n == None else 1 })
+        return jsonify({ 'n': 0 if n == None else 1 }), 200
     except (OSError, JSONDecodeError) as e:
         print("error", e)
         return jsonify({ "error": "Internal Server Error" }), 500

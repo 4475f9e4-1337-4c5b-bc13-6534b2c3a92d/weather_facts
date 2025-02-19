@@ -1,7 +1,7 @@
 @echo off
 
 if not defined HOST set HOST=127.0.0.1
-if not defined PORT set PORT=5050
+if not defined PORT set PORT=5000
 
 if "%1" == "dev" (
     call .venv\Scripts\activate
