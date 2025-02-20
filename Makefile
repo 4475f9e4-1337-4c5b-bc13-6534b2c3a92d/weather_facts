@@ -23,9 +23,10 @@ run:
 
 clean:
 ifeq ($(OS), Windows_NT)
-	@rmdir /s /q $(VENV)
-	@rmdir /s /q build
-	@rmdir /s /q weather_facts.egg-info
+	@if exist "$(VENV)" rmdir /s /q "$(VENV)"
+	@if exist "build" rmdir /s /q "build"
+	@if exist "weather_facts.egg-info" rmdir /s /q "weather_facts.egg-info"
+	@if exist "favorites.json" del /q "favorites.json"
 else
 	@rm -rf $(VENV)
 	@rm -rf build
