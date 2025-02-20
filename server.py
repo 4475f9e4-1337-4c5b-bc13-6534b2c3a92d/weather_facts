@@ -91,7 +91,6 @@ def post_favorite():
     data = request.get_json(force=True, silent=True)
     if not data or "fact" not in data:
         return jsonify({ "error": "Missing 'fact' property in body" }), 400
-
     try:
         favorites = read_favorites()
         fact = data.get('fact')

@@ -30,6 +30,7 @@ else
 	@rm -rf $(VENV)
 	@rm -rf build
 	@rm -rf weather_facts.egg-info
+	@rm -f favorites.json
 endif
 	@echo "Clean complete."
 
