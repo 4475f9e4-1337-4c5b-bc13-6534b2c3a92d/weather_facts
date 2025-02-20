@@ -1,6 +1,8 @@
 ### 🌦️ Weather Facts API 🌦️
 
-This project provides a simple API that returns random weather facts. The API exposes two endpoints `/fact` and `/favorites` that can be used to retrieve and save random weather facts.
+This project provides a simple API to handle the creation and saving of weather facts. 
+
+The API exposes two endpoints `/fact` and `/favorites` that can be used to retrieve and save random weather facts.
 
 ---
 
