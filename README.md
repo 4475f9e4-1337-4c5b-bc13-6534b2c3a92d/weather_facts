@@ -86,7 +86,7 @@ print(r.json())
 
 ---
 #### GET `/favorites`
-##### Get a saved favorite weather fact.
+##### Get all saved favorite weather facts.
 
 ##### Code samples:
 ###### shell
