@@ -54,6 +54,9 @@ HOST=0.0.0.0 PORT=8080 ./run.sh
 ```
 ---
 ### 📝 API Usage 📝
+To interact with the API, clients should send HTTP requests to the appropriate endpoint while ensuring the correct headers are set. 
+
+The `Accept: application/json` header should be included with all requests to indicate that the client expects a JSON-formatted response. For `POST` requests that include a JSON payload in the request body, the `Content-Type: application/json` header must also be set to inform the server of the data format. The APIs response will include a JSON body, which clients can parse to extract the returned data. See below code samples for usage and payloads expectations.
 
 #### GET `/fact`
 ##### Get a random weather fact.
